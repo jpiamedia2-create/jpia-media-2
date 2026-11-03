@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JPIA Media — National University Bacolod</title>
+<link rel="icon" href="nu-shield.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ===== MAIN INTERFACE (viewer / editor) ===== -->
+  <header id="head">
+    <div id="title">National University <b>BACOLOD</b></div>
+    <div id="shield"><img src="nu-shield.png" alt="National University 1900"></div>
+    <div id="band">
+      <div id="logos"><img src="jpia-logo.png" alt="JPIA"><img src="jama-logo.png" alt="JAMA"></div>
+      <div id="media">JPIA<br>MEDIA</div>
+      <button id="signas" title="Sign out">Sign in as:</button>
+      <button class="role r-president" data-role="president"><i></i><span>JPIA President</span><em id="plus" title="Access keys" hidden></em></button>
+      <button class="role r-vp" data-role="vp"><i></i><span>JPIA VP</span></button>
+      <button class="role r-sc" data-role="sc"><i></i><span>JPIA SC</span></button>
+      <button id="hist" title="History" hidden></button>
+    </div>
+  </header>
+
+  <div id="bar">
+    <div id="albumsLbl">ALBUMS</div>
+    <label id="search">Search Album: <input id="q" type="search" autocomplete="off" spellcheck="false" aria-label="Search Album"></label>
+  </div>
+
+  <div id="body">
+    <nav id="side" aria-label="Albums"></nav>
+    <section id="content">
+      <div id="tools"></div>
+      <div id="grid"></div>
+    </section>
+  </div>
+
+  <!-- ===== ACCESS KEY PAGE ===== -->
+  <div class="page" id="keysPage">
+    <div class="phead"><div class="ptitle">National University <b>BACOLOD</b></div><img src="nu-shield.png" alt=""></div>
+    <div class="panel keys">
+      <div class="ktop"><button id="keysClose" class="plusBig" title="Close"></button><h1 class="silver">JPIA MEDIA ACCESS KEY</h1></div>
+      <div id="keysBody"></div>
+    </div>
+    <button class="ret" id="keysReturn" type="button">&#8592; RETURN</button>
+  </div>
+
+  <!-- ===== HISTORY PAGE ===== -->
+  <div class="page" id="histPage">
+    <div class="phead"><div class="ptitle">National University <b>BACOLOD</b></div><img src="nu-shield.png" alt=""></div>
+    <div class="panel info">
+      <div class="itop"><h1 class="silver">JPIA MEDIA<br>INFORMATION</h1><button id="histClose" class="exBig" title="Close"></button></div>
+      <h2 class="silver">STORAGE CAPACITY</h2>
+      <div id="storage"><div id="used">USED</div><div id="unused">UNUSED</div></div>
+      <h2 class="silver">CHANGES</h2>
+      <div id="changes"></div>
+    </div>
+    <button class="ret" id="histReturn" type="button">&#8592; RETURN</button>
+  </div>
+
+  <!-- ===== ENTER ACCESS KEY POPUP ===== -->
+  <div class="pop" id="keyPop">
+    <div class="box">
+      <h1 class="silver">ENTER ACCESS KEY</h1>
+      <input id="keyIn" type="password" autocomplete="off" spellcheck="false" aria-label="Enter access key">
+    </div>
+  </div>
+
+  <!-- ===== RESTORE POPUP ===== -->
+  <div class="pop" id="restorePop">
+    <div class="box tall">
+      <h1 class="silver">RESTORE</h1>
+      <div id="restoreList"></div>
+    </div>
+    <button class="ret" id="restoreReturn" type="button">&#8592; RETURN</button>
+    <button class="ret all" id="restoreAll" type="button" hidden><img src="clean.png" alt=""> DELETE ALL FOREVER</button>
+  </div>
+
+  <div id="toast" role="status"></div>
+</div>
+<input id="file" type="file" accept="image/*,.heic,.heif" multiple hidden>
+<script src="app.js"></script>
+</body>
+</html>
