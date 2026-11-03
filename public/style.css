@@ -171,3 +171,5 @@ input { font:inherit; }
 .page { position:fixed; inset:0; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; }
 .page .ret { position:fixed; left:22px; bottom:18px; margin:0; }
 .page .panel { flex:none; min-height:calc(100% - 148px); padding-bottom:110px; }
+
+html,body{overflow-x:hidden;max-width:100%}
