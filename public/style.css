@@ -110,9 +110,10 @@ input { font:inherit; }
 .info h2 { font-size:31px; margin:34px 0 20px 65px; letter-spacing:.5px; }
 .exBig { width:122px; height:104px; margin-top:20px; display:flex; align-items:center; justify-content:center; }
 .exBig svg { width:104px; height:104px; }
-#storage { display:flex; margin-left:160px; width:553px; height:78px; border:1px solid #0a2a40; font-size:24px; }
-#storage > div { display:flex; align-items:center; justify-content:center; color:#000; overflow:hidden; white-space:nowrap; }
-#used { background:#ff2a55; flex:0 0 34%; min-width:92px; } #unused { background:#00c060; flex:1; }
+#storage { margin:0 0 0 160px; width:553px; font-size:24px; color:#fff; text-align:center; }
+#storage svg { display:block; width:553px; height:auto; }
+#storage .legend { display:flex; justify-content:center; gap:48px; margin-top:6px; font-size:26px; }
+#storage .legend b { display:inline-block; width:22px; height:22px; vertical-align:-3px; margin-right:10px; }
 #changes { margin:0 0 0 70px; width:787px; background:#fff; border:1px solid #000; }
 .ch { display:grid; grid-template-columns:192px 1fr; min-height:78px; border-bottom:1px solid #000; font-size:25px; text-transform:uppercase; }
 .ch:last-child { border-bottom:0; }
