@@ -367,12 +367,31 @@
   }
 
   // ------------------------------------------------------------ history page
+
+  // Half-circle storage gauge: green (unused) -> red (used), needle shows how full the storage is.
+  function drawGauge(pct, bytes) {
+    const NS = 'http://www.w3.org/2000/svg', cx = 280, cy = 270, R = 220, W = 54;
+    const pt = (p, r) => { const a = Math.PI * (1 - p / 100); return [cx + r * Math.cos(a), cy - r * Math.sin(a)]; };
+    const arc = (p1, p2, col) => { const [x1, y1] = pt(p1, R), [x2, y2] = pt(p2, R); return `<path d="M${x1} ${y1} A${R} ${R} 0 0 1 ${x2} ${y2}" fill="none" stroke="${col}" stroke-width="${W}"/>`; };
+    const mb = bytes / 1048576, size = mb >= 1024 ? (mb / 1024).toFixed(2) + ' GB' : mb.toFixed(1) + ' MB';
+    let ticks = '';
+    for (let p = 0; p <= 100; p += 10) { const [x1, y1] = pt(p, R + W / 2 + 4), [x2, y2] = pt(p, R + W / 2 + (p % 50 ? 12 : 20)); ticks += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#fff" stroke-width="3"/>`; }
+    const ang = 180 * pct / 100 - 90, shown = pct > 0 && pct < 0.1 ? '<0.1' : pct.toFixed(pct < 10 ? 1 : 0);
+    const left = Math.max(0, 100 - pct).toFixed(pct < 10 ? 1 : 0).replace(/\.0$/, ''), box = $('#storage');
+    box.innerHTML = `<svg viewBox="0 0 560 372" role="img" aria-label="Storage ${shown}% used">
+      ${arc(0, 100, '#00c060')}${pct > 0 ? arc(0, Math.max(pct, 0.6), '#ff2a55') : ''}${ticks}
+      <g style="transform:rotate(${ang}deg);transform-origin:${cx}px ${cy}px;transition:transform .8s ease"><polygon points="${cx - 9},${cy} ${cx + 9},${cy} ${cx},${cy - R + 18}" fill="#fff"/></g>
+      <circle cx="${cx}" cy="${cy}" r="20" fill="#fff"/><circle cx="${cx}" cy="${cy}" r="8" fill="#023051"/>
+      <text x="${cx}" y="${cy + 52}" fill="#ff6b87" font-size="34" font-weight="bold" text-anchor="middle" font-family="Times New Roman,serif">${shown}% USED</text>
+      <text x="${cx}" y="${cy + 90}" fill="#2be07f" font-size="30" font-weight="bold" text-anchor="middle" font-family="Times New Roman,serif">${left}% UNUSED</text>
+    </svg>
+    <div class="legend"><span><b style="background:#ff2a55"></b>USED ${size}</span><span><b style="background:#00c060"></b>UNUSED ${(100 - pct).toFixed(pct < 10 ? 1 : 0)}%</span></div>`;
+  }
   async function openHistory() {
     await act(async () => {
       const d = await api('GET', '/api/history');
       const used = Math.max(0, Math.min(100, d.usage.percent || 0));
-      $('#used').style.flexBasis = used + '%';
-      $('#storage').title = `${(d.usage.usedBytes / 1048576).toFixed(1)} MB used (${used.toFixed(1)}%)`;
+      drawGauge(used, d.usage.usedBytes || 0);
       const box = $('#changes'); box.textContent = '';
       if (!d.history.length) box.append(h('div', { class: 'ch none' }, 'No changes yet.'));
       d.history.forEach((c) => box.append(h('div', { class: 'ch', title: `${new Date(c.at).toLocaleString()}${c.detail ? ' — ' + c.detail : ''}` }, h('div', {}, c.who), h('div', {}, c.text))));
