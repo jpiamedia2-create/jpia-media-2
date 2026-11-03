@@ -61,8 +61,17 @@
   }
   const act = async (fn) => { try { return await fn(); } catch (e) { toast(e.message, true); } };
 
-  function fit() { document.documentElement.style.setProperty('--z', Math.max(0.36, Math.min(innerWidth / 910, 1.3))); }
-  addEventListener('resize', fit); fit();
+  // Phones/tablets narrower than the 910-unit design: ask the browser for a 910px layout width so it
+  // shrinks the whole page to fit the screen (same look as the baseline, nothing re-flowed or distorted).
+  const vp = document.querySelector('meta[name=viewport]');
+  function fit() {
+    const sw = Math.min(screen.width || 9999, screen.height || 9999);
+    const touch = matchMedia('(pointer:coarse)').matches || 'ontouchstart' in window;
+    if (vp) vp.setAttribute('content', touch && sw < 910 ? 'width=910, initial-scale=' + (sw / 910).toFixed(4) + ', minimum-scale=0.2, maximum-scale=3, user-scalable=yes' : 'width=device-width, initial-scale=1');
+    const w = document.documentElement.clientWidth || innerWidth;
+    document.documentElement.style.setProperty('--z', touch && sw < 910 ? 1 : Math.max(0.36, Math.min(w / 910, 1.3)));
+  }
+  addEventListener('resize', fit); addEventListener('orientationchange', fit); fit();
 
   // ------------------------------------------------------------ data
   async function load(force) {
