@@ -410,6 +410,7 @@
   $('#restoreAll').addEventListener('click', purgeAll);
   $('#signas').addEventListener('click', () => { if (isEditor() && confirm('Sign out?')) signOut(false); });
   $('#keyIn').addEventListener('keydown', (e) => { if (e.key === 'Enter') doLogin(); if (e.key === 'Escape') $('#keyPop').classList.remove('on'); });
+  $('#keyReturn').addEventListener('click', () => $('#keyPop').classList.remove('on'));
   $('#keyIn').addEventListener('input', () => $('#keyIn').classList.remove('bad'));
   $('#keyPop').addEventListener('mousedown', (e) => { if (e.target.id === 'keyPop') $('#keyPop').classList.remove('on'); });
   $('#restorePop').addEventListener('mousedown', (e) => { if (e.target.id === 'restorePop') $('#restorePop').classList.remove('on'); });
