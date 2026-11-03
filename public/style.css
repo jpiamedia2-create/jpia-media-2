@@ -174,3 +174,5 @@ input { font:inherit; }
 .page .panel { flex:none; min-height:calc(100% - 148px); padding-bottom:110px; }
 
 html,body{overflow-x:hidden;max-width:100%}
+
+.pop .ret.inbox { position:static; display:block; margin:26px auto 0; }
