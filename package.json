@@ -1,0 +1,13 @@
+{
+  "name": "jpia-media",
+  "version": "1.0.0",
+  "description": "JPIA Media photo albums for National University Bacolod. Cloudinary-backed, role-based access keys. Zero dependencies.",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "STORE=dev PRESIDENT_KEY=president-dev SESSION_SECRET=dev-secret-dev-secret node server.js",
+    "test": "node test/smoke.js"
+  },
+  "engines": { "node": ">=18" }
+}
