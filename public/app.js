@@ -385,7 +385,7 @@
       <text x="${cx}" y="${cy + 52}" fill="#ff6b87" font-size="34" font-weight="bold" text-anchor="middle" font-family="Times New Roman,serif">${shown}% USED</text>
       <text x="${cx}" y="${cy + 90}" fill="#2be07f" font-size="30" font-weight="bold" text-anchor="middle" font-family="Times New Roman,serif">${left}% UNUSED</text>
     </svg>
-    <div class="legend"><span><b style="background:#ff2a55"></b>USED ${size}</span><span><b style="background:#00c060"></b>UNUSED ${(100 - pct).toFixed(pct < 10 ? 1 : 0)}%</span></div>`;
+    <div class="legend" style="display:flex;justify-content:center;gap:48px;margin-top:6px;font-size:26px;color:#fff;font-family:Times New Roman,serif"><span style="color:#fff"><b style="display:inline-block;width:22px;height:22px;vertical-align:-3px;margin-right:10px;background:#ff2a55"></b>USED ${size}</span><span style="color:#fff"><b style="display:inline-block;width:22px;height:22px;vertical-align:-3px;margin-right:10px;background:#00c060"></b>UNUSED ${(100 - pct).toFixed(pct < 10 ? 1 : 0)}%</span></div>`;
   }
   async function openHistory() {
     await act(async () => {
